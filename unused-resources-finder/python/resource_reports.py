@@ -5,7 +5,8 @@ def create_instances_report(instances):
         'Instance ID',
         'Instance Type',
         'Instance status',
-        'Public IP'
+        'Public IP',
+        'Region'
     ]
 
     rows = []
@@ -16,7 +17,8 @@ def create_instances_report(instances):
                 instance['InstanceId'],
                 instance['InstanceType'],
                 instance['State']['Name'],
-                instance['PublicIpAddress'] if 'PublicIpAddress' in instance.keys() else '-'
+                instance['PublicIpAddress'] if 'PublicIpAddress' in instance.keys() else '-',
+                instance['Region']
             ]
         rows.append(row)
     report = {'header': header, 'rows': rows}
