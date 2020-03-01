@@ -1,0 +1,7 @@
+# IDE
+.vscode
+.idea
+
+# local files and folders
+local
+output
