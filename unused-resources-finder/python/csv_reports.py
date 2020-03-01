@@ -1,6 +1,7 @@
 import csv
+from datetime import datetime, timezone
 
-def create_instances_report(instances):
+def prepare_instances_report(instances):
     header = [
         'Instance ID',
         'Instance Type',
@@ -20,10 +21,11 @@ def create_instances_report(instances):
                 instance['Region']
             ]
         rows.append(row)
-    report = {'header': header, 'rows': rows}
+    name = 'stopped-instances-report'
+    report = {'name': name, 'header': header, 'rows': rows}
     return report
 
-def create_unused_eip_report(addresses):
+def prepare_unused_eip_report(addresses):
     header = [
         'IP Address',
         'Network Interface ID',
@@ -43,6 +45,23 @@ def create_unused_eip_report(addresses):
             address['Comment'] if 'Comment' in address.keys() else '-'
         ]
         rows.append(row)
-    report = {'header': header, 'rows': rows}
+    name = 'unused-eips-report'
+    report = {'name': name, 'header': header, 'rows': rows}
     return report
 
+def create_file_path(report_name, output_folder):
+    now = datetime.now(timezone.utc)
+
+    filename = '{}-{}'.format(report_name, now.strftime("%Y%m%d-%H%M%S"))
+    file_path = '{}/{}'.format(output_folder, filename)
+
+    return file_path
+
+def write_to_csv(report, output_folder):
+
+    file_path = create_file_path(report['name'], output_folder)
+
+    with open(file_path, 'w', newline='') as file:
+        writer = csv.writer(file, delimiter=';')
+        writer.writerow(report['header'])
+        writer.writerows(report['rows'])

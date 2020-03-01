@@ -15,11 +15,6 @@ def get_instances(session, regions):
 
     return instances
 
-def find_stopped_instances(instances):
-    stopped_instances = list(filter(
-        lambda instance: instance['State']['Name'] == 'stopped', instances))
-    return stopped_instances
-
 def get_public_ip_addresses(session, regions):
     ip_addresses = []
 
@@ -46,6 +41,11 @@ def get_network_interfaces(session, regions):
             network_interfaces.append(interface)
 
     return network_interfaces
+
+def find_stopped_instances(instances):
+    stopped_instances = list(filter(
+        lambda instance: instance['State']['Name'] == 'stopped', instances))
+    return stopped_instances
 
 def find_unused_public_ip_addresses(addresses, instances, interfaces):
     unused_addresses = []
@@ -80,4 +80,16 @@ def find_unused_public_ip_addresses(addresses, instances, interfaces):
                             address['Comment'] = 'Associated with not running instance {}'.format(instance['InstanceId'])
                             unused_addresses.append(address)
 
+    return unused_addresses
+
+def prepare_stopped_instances_data(session, regions):
+    instances = get_instances(session, regions)
+    stopped_instances = find_stopped_instances(instances)
+    return stopped_instances
+
+def prepare_unused_eips_data(session, regions):
+    instances = get_instances(session, regions)
+    addresses = get_public_ip_addresses(session, regions)
+    interfaces = get_network_interfaces(session, regions)
+    unused_addresses = find_unused_public_ip_addresses(addresses, instances, interfaces)
     return unused_addresses
