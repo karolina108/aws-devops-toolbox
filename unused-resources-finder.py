@@ -1,9 +1,9 @@
 import boto3
 import sys
 
-from utils import get_region_names
-from ec2_resources import *
-from csv_reports import *
+from common.utils import get_region_names
+from unusedresources.ec2resources import *
+from common.csvreports import *
 
 def main():
     session = boto3.Session()
