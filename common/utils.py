@@ -6,6 +6,6 @@ def get_region_names(session):
     region_names = [region['RegionName'] for region in regions]
     return region_names
 
-
-
-
+def enrich_with_region(resource, region):
+    if 'Region' not in resource.keys():
+        resource['Region'] = region
