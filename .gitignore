@@ -1,7 +1,12 @@
 # IDE
 .vscode
 .idea
+.DS_Store
 
 # local files and folders
 local
 output/*
+
+# python
+.pyc
+__pycache__
