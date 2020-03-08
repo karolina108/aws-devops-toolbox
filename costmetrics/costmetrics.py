@@ -74,10 +74,8 @@ def prepare_cost_metrics_report(items, group_by, metrics, report_name):
         ]
 
     for group in group_by:
-        print(group)
         lower_cased = list(map(lambda word: word.lower(), group['Key'].split('_')))
         upper_cased = list(map(lambda word: ''.join([word[0].upper(), word[1:]]), lower_cased))
-        print(upper_cased)
         joined = ''.join(upper_cased)
         header.append(joined)
 
