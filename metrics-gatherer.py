@@ -29,7 +29,7 @@ def main():
         '30_days': {'period': 2592000, 'interval': 455, 'retention': 455}
     }
 
-    if sys.argv[1] and sys.argv[1] in periods_for_metrics.keys() :
+    if len(sys.argv) > 1 and sys.argv[1] in periods_for_metrics.keys() :
         resolution = sys.argv[1]
     else:
         print('Using default resolution: 1 hour')
