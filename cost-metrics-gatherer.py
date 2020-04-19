@@ -4,14 +4,7 @@ from datetime import datetime, date, timedelta
 import costmetrics.costmetrics as cm
 from common.csvreports import write_to_csv
 
-def main():
-    session = boto3.Session()
-
-    start_date = ('2019-12-01')
-    end_date = ('2020-03-01')
-
-    # General cost report
-
+def create_general_cost_report(session, start_date, end_date):
     cost_metrics = ['BlendedCost', 'UnblendedCost']
     granularity = 'MONTHLY'
 
@@ -37,10 +30,8 @@ def main():
 
     write_to_csv(all_costs_report, output_folder='output')
 
-    # Service costs report
-
+def create_service_cost_report(session, start_date, end_date, granularity):
     all_metrics = ['BlendedCost', 'UnblendedCost']
-    granularity = 'MONTHLY'
 
     record_type_filter = cm.create_filter('Dimensions', 'RECORD_TYPE', ['Usage'])
 
@@ -63,10 +54,8 @@ def main():
 
     write_to_csv(service_costs_report, output_folder='output')
 
-    # Service costs & usage report
-
+def create_service_and_usage_report(session, start_date, end_date, granularity):
     all_metrics = ['BlendedCost', 'UnblendedCost', 'UsageQuantity']
-    granularity = 'MONTHLY'
 
     record_type_filter = cm.create_filter('Dimensions', 'RECORD_TYPE', ['Usage'])
 
@@ -90,6 +79,20 @@ def main():
 
     write_to_csv(service_costs_usage_report, output_folder='output')
 
+def main():
+    session = boto3.Session()
+
+    # date format: yyyy-MM-dd for monthly and daily
+    start_date = sys.argv[1]
+    end_date = sys.argv[2]
+
+    create_general_cost_report(session, start_date, end_date)
+
+    granularity = 'MONTHLY'
+
+    create_service_cost_report(session, start_date, end_date, granularity)
+
+    create_service_and_usage_report(session, start_date, end_date, granularity)
 
 if __name__ == '__main__':
     main()
