@@ -14,7 +14,7 @@ def main():
     if len(sys.argv) == 1:
         output_folder = 'output'
     else:
-        output_folder = '{}'.format(sys.argv[1], filename)
+        output_folder = '{}'.format(sys.argv[1])
 
     stopped_instances = prepare_stopped_instances_data(session, regions)
     stopped_instances_report = prepare_instances_report(stopped_instances)
