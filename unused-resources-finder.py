@@ -8,7 +8,7 @@ from common.csvreports import *
 def main():
     session = boto3.Session()
     regions = get_region_names(session)
-    
+
     print('Searching for resources in regions: {}'.format(regions))
 
     if len(sys.argv) == 1:

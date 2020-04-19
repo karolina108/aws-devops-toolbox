@@ -35,7 +35,7 @@ def get_aws_cost_and_usage(session, start_date, end_date, granularity,
             Granularity=granularity,
             Filter=filter,
             Metrics=metrics,
-            GroupBy=dimensions)
+            GroupBy=group_by)
 
         items += costs_and_usage['ResultsByTime']
 
