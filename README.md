@@ -7,3 +7,5 @@ The tools developed in this project are intended to make your cloud developer / 
 [Unused resources finder](unusedresources/unused-resources-finder.md)
 
 [Metrics gathering](metrics/metrics-gatherer.md)
+
+[Cost metrics](costmetrics/cost-metrics-gatherer.md)
