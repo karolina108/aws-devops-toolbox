@@ -14,7 +14,7 @@ Then the import the data to a spreadsheet and make pivot tables or use [PivotTab
 
 ## Usage
 
-`awsume` a role that allows access to cost explorer.
+`assume` a role that allows access to cost explorer (the best way for this is using [awsume](https://awsu.me/))
 
 `pipenv install`
 
@@ -24,4 +24,6 @@ then:
 
 `python costmetrics.py ${start_date} ${end_date}`
 
-for monthly and daily granularity the start_date and end_date format should be `yyyy-MM-dd`
+or `pipenv run costmetrics.py ${start_date} ${end_date}`
+
+For monthly and daily granularity the start_date and end_date format should be `yyyy-MM-dd`
