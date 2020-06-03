@@ -31,7 +31,7 @@ def create_general_cost_report(session, start_date, end_date):
     write_to_csv(all_costs_report, output_folder='output')
 
 def create_service_cost_report(session, start_date, end_date, granularity):
-    all_metrics = ['BlendedCost', 'UnblendedCost']
+    all_metrics = ['BlendedCost', 'UnblendedCost', 'AmortizedCost']
 
     record_type_filter = cm.create_filter('Dimensions', 'RECORD_TYPE', ['Usage'])
 

@@ -11,12 +11,13 @@ def main():
     regions = get_region_names(session)
 
     available_metrics = get_all_metrics_list(session, regions)
-    metrics = available_metrics
+    #metrics = available_metrics
 
     # uncomment for further metrics filtering:
 
     # metrics = find_metrics_by_name(available_metrics, namespace, metric_name)
-    # metrics = find_metrics_by_namespace(available_metrics, namespace)
+    namespace = 'AWS/NetworkELB'
+    metrics = find_metrics_by_namespace(available_metrics, namespace)
     # metrics = find_metrics_by_dimension_value(available_metrics, dimension_value)
 
     periods_for_metrics = {
